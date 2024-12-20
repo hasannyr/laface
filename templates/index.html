@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Image</title>
+</head>
+
+<body>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Sayfanın tamamını kapla */
+            margin: 0;
+            /* Varsayılan margin'i kaldır */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            /* Sayfanın tamamını kapla */
+            margin: 0;
+            /* Varsayılan margin'i kaldır */
+        }
+
+        .rating-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Sayfanın tamamını kapla */
+            margin: 0;
+            /* Varsayılan margin'i kaldır */
+        }
+
+        #buttons-1,
+        #buttons-2,
+        #buttons-3,
+        #buttons-4 {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            /* Butonların taşmasını önlemek için */
+            margin-top: 20px;
+            margin-right: 20px;
+        }
+
+        #buttons-1 button,
+        #buttons-2 button,
+        #buttons-3 button,
+        #buttons-4 button {
+            background-color: #4CAF50;
+            /* Yeşil arka plan */
+            border: none;
+            /* Kenarlık yok */
+            color: white;
+            /* Beyaz yazı rengi */
+            padding: 10px 20px;
+            /* İç boşluk */
+            text-align: center;
+            /* Metin ortalama */
+            text-decoration: none;
+            /* Alt çizgi yok */
+            display: inline-block;
+            /* Satır içi blok */
+            font-size: 16px;
+            /* Yazı boyutu */
+            margin: 4px 2px;
+            /* Dış boşluk */
+            cursor: pointer;
+            /* İmleç değişimi */
+            border-radius: 8px;
+            /* Yuvarlatılmış köşeler */
+            transition: background-color 0.3s;
+            /* Arka plan rengi geçişi */
+        }
+        #buttons-1 button:disabled,
+        #buttons-2 button:disabled,
+        #buttons-3 button:disabled,
+        #buttons-4 button:disabled {
+            background-color: #808080;
+            cursor: not-allowed;
+        }
+
+        #buttons-1 button:disabled.selected,
+        #buttons-2 button:disabled.selected,
+        #buttons-3 button:disabled.selected,
+        #buttons-4 button:disabled.selected {
+            background-color: #4CAF50;
+        }
+
+        #buttons-1 button:hover,
+        #buttons-2 button:hover,
+        #buttons-3 button:hover,
+        #buttons-4 button:hover {
+            background-color: #45a049;
+            /* Hover durumunda daha koyu yeşil */
+        }
+    </style>
+
+    <!-- <h1 style="font-size: 2.5em; font-weight: bold; color: #000000; font-family: Arial, sans-serif;">LaFace Image
+        Rating
+        App</h1> -->
+    <div class="container">
+
+        <div class="rating-container">
+            <img id="photo-1" alt="Random Person" style="margin-top: 20px; max-width: 325px;" src="{{ image_data[0] }}">
+            <div id="buttons-1">
+                <button onclick="setRating(1, 0)">1</button>
+                <button onclick="setRating(2, 0)">2</button>
+                <button onclick="setRating(3, 0)">3</button>
+                <button onclick="setRating(4, 0)">4</button>
+                <button onclick="setRating(5, 0)">5</button>
+                <button onclick="setRating(6, 0)">6</button>
+                <button onclick="setRating(7, 0)">7</button>
+                <button onclick="setRating(8, 0)">8</button>
+                <button onclick="setRating(9, 0)">9</button>
+                <button onclick="setRating(10, 0)">10</button>
+            </div>
+            <img id="photo-2" alt="Random Person" style="margin-top: 20px; max-width: 325px;" src="{{ image_data[1] }}">
+            <div id="buttons-2">
+                <button onclick="setRating(1, 1)">1</button>
+                <button onclick="setRating(2, 1)">2</button>
+                <button onclick="setRating(3, 1)">3</button>
+                <button onclick="setRating(4, 1)">4</button>
+                <button onclick="setRating(5, 1)">5</button>
+                <button onclick="setRating(6, 1)">6</button>
+                <button onclick="setRating(7, 1)">7</button>
+                <button onclick="setRating(8, 1)">8</button>
+                <button onclick="setRating(9, 1)">9</button>
+                <button onclick="setRating(10, 1)">10</button>
+            </div>
+
+        </div>
+
+        <div class="rating-container">
+            <img id="photo-3" alt="Random Person" style="margin-top: 20px; max-width: 325px;" src="{{ image_data[2] }}">
+            <div id="buttons-3">
+                <button onclick="setRating(1, 2)">1</button>
+                <button onclick="setRating(2, 2)">2</button>
+                <button onclick="setRating(3, 2)">3</button>
+                <button onclick="setRating(4, 2)">4</button>
+                <button onclick="setRating(5, 2)">5</button>
+                <button onclick="setRating(6, 2)">6</button>
+                <button onclick="setRating(7, 2)">7</button>
+                <button onclick="setRating(8, 2)">8</button>
+                <button onclick="setRating(9, 2)">9</button>
+                <button onclick="setRating(10, 2)">10</button>
+            </div>
+            <img id="photo-4" alt="Random Person" style="margin-top: 20px; max-width: 325px;" src="{{ image_data[3] }}">
+            <div id="buttons-4">
+                <button onclick="setRating(1, 3)">1</button>
+                <button onclick="setRating(2, 3)">2</button>
+                <button onclick="setRating(3, 3)">3</button>
+                <button onclick="setRating(4, 3)">4</button>
+                <button onclick="setRating(5, 3)">5</button>
+                <button onclick="setRating(6, 3)">6</button>
+                <button onclick="setRating(7, 3)">7</button>
+                <button onclick="setRating(8, 3)">8</button>
+                <button onclick="setRating(9, 3)">9</button>
+                <button onclick="setRating(10, 3)">10</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let state =
+        {
+            ["{{ image_id[0] }}"]: { order: 0, rating: null },
+            ["{{ image_id[1] }}"]: { order: 1, rating: null },
+            ["{{ image_id[2] }}"]: { order: 2, rating: null },
+            ["{{ image_id[3] }}"]: { order: 3, rating: null },
+        }
+        const refreshView = () => {
+            let count = 0
+            Object.keys(state).forEach((key, index) => {
+                const buttons = document.getElementById(`buttons-${state[key].order + 1}`);
+                const buttonElements = buttons.getElementsByTagName('button');
+                Array.from(buttonElements).forEach((button, index2) => {
+                    button.disabled = state[key].rating ? true : false;
+                    if (index2 === state[key].rating - 1) {
+                        button.classList.add('selected');
+                    } else {
+                        button.classList && button.classList.remove('selected');
+                    }
+                });
+                if (state[key].rating) {    
+                    count++
+                }
+            });
+            if (count === 4) {
+                submitRating()
+            }
+        }
+        function setState(id, val) {
+            Object.keys(state).forEach(key => {
+                if (state[key].order === id) {
+                    state[key].rating = val
+                }
+            })
+            refreshView()
+        }
+        async function fetchImage() {
+            try {
+                const response = await fetch('/fetch-image');
+                const data = await response.json();
+                const {ids, images} = data
+                ids.forEach((id, index) => {
+                    const photo = document.getElementById(`photo-${index + 1}`);
+                    photo.src = images[index];
+                })
+                state = {
+                    [ids[0]]: { order: 0, rating: null },
+                    [ids[1]]: { order: 1, rating: null },
+                    [ids[2]]: { order: 2, rating: null },
+                    [ids[3]]: { order: 3, rating: null },
+                }
+                refreshView()
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+
+        async function setRating(rating, id) {
+            setState(id, rating)
+        }
+
+        async function submitRating(rating, id) {
+            try {
+                const response = await fetch('/submit-rating', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(state),
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    fetchImage();
+                } else {
+                    console.error("Error submitting rating:", data.error);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        // fetchImage();
+    </script>
+</body>
+
+</html>
